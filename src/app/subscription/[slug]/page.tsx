@@ -45,7 +45,7 @@ async function fetchSubscriptionPlan(slug: string) {
     content
   }`;
   try {
-    const result = await client.fetch(query, { slug, _cacheBuster: Date.now() });
+    const result = await client.fetch(query, { slug});
     console.log("Full fetched subscription plan:", JSON.stringify(result, null, 2));
     console.log("Plans array:", result.plans);
     return result;
@@ -156,6 +156,13 @@ export default async function SubscriptionPage({
         {/* Overview - With Truncation, No Dropdown */}
         <TruncatedSection title="Overview" content={platformSummary} truncateLength={100} />
 
+        {/* Terms and Conditions - With Truncation, No Dropdown */}
+        <TruncatedSection
+          title="Terms & Conditions"
+          content={termsAndConditions.join(" ")}
+          truncateLength={100}
+        />
+
         {/* Benefits - Dropdown Without Truncation */}
         <CollapsibleSection title="Benefits with Fleek">
           <ul className="list-disc list-inside text-sm space-y-1">
@@ -178,12 +185,6 @@ export default async function SubscriptionPage({
           ))}
         </CollapsibleSection>
 
-        {/* Terms and Conditions - With Truncation, No Dropdown */}
-        <TruncatedSection
-          title="Terms & Conditions"
-          content={termsAndConditions.join(" ")}
-          truncateLength={100}
-        />
       </div>
     </main>
   );

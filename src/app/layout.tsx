@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import ThemeProvider from "@/components/ThemeProvider";
 import Footer from "@/components/Footer";
 import Container from "@/components/Container";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -21,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} bg-light dark:bg-dark `}
+        className={`${montserrat.className} bg-black `}
       >
         <ThemeProvider
           attribute="class"
