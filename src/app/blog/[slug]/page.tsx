@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import CollapsibleSection from "@/components/CollapsibleSection";
 import TruncatedSection from "@/components/TruncatedSection";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from "react";
 
 interface Plan {
   name: string;
@@ -112,7 +113,7 @@ export default async function SubscriptionPage({
         {/* Plan Details - Show All Plans */}
         <div className="bg-gray-900 p-6 rounded-lg mb-6">
           <h2 className="text-xl font-semibold mb-4">{brandName}</h2>
-          {plans.map((plan, index) => (
+          {plans.map((plan: { isAvailable: any; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; duration: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; benefits: (string | number | boolean | ReactPortal | PromiseLikeOfReactNode | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined)[]; activationInfo: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; discountedPrice: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; originalPrice: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; }, index: Key | null | undefined) => (
             <div
               key={index}
               className={`p-4 rounded-lg mb-4 ${
@@ -124,7 +125,7 @@ export default async function SubscriptionPage({
                   <h3 className="text-lg font-medium mb-1">{plan.name}</h3>
                   <p className="text-sm mb-2 text-gray-400">{plan.duration}</p>
                   <ul className="list-disc list-inside text-sm space-y-1">
-                    {plan.benefits.map((benefit, benefitIndex) => (
+                    {plan.benefits.map((benefit: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined, benefitIndex: Key | null | undefined) => (
                       <li key={benefitIndex} className="text-gray-300">
                         {benefit}
                       </li>
@@ -159,7 +160,7 @@ export default async function SubscriptionPage({
         {/* Benefits - Dropdown Without Truncation */}
         <CollapsibleSection title="Benefits with Fleek">
           <ul className="list-disc list-inside text-sm space-y-1">
-            {benefits.map((benefit, index) => (
+            {benefits.map((benefit: { title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; description: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; }, index: Key | null | undefined) => (
               <li key={index}>
                 <span className="font-semibold">{benefit.title}</span>:{" "}
                 {benefit.description}
@@ -170,7 +171,7 @@ export default async function SubscriptionPage({
 
         {/* FAQs - Dropdown Without Truncation */}
         <CollapsibleSection title="FAQs">
-          {faqs.map((faq, index) => (
+          {faqs.map((faq: { question: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; answer: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; }, index: Key | null | undefined) => (
             <div key={index} className="mb-4">
               <h4 className="text-md font-semibold">{faq.question}</h4>
               <p className="text-sm">{faq.answer}</p>
@@ -196,7 +197,7 @@ export async function generateStaticParams() {
   try {
     const subscriptions = await client.fetch(query);
     console.log("Subscriptions for static params:", subscriptions);
-    return subscriptions.map((subscription) => ({
+    return subscriptions.map((subscription: { slug: { current: any; }; }) => ({
       slug: subscription.slug.current,
     }));
   } catch (error) {
